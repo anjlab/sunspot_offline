@@ -8,7 +8,11 @@ Gem::Specification.new do |s|
   s.authors     = ['Sergey Glukhov']
   s.email       = ['sergey.glukhov@gmail.com']
   s.summary     = 'Simple failover method into your sunspot_rails + sidekiq setup'
-  s.description = 'Simple failover method into your sunspot_rails + sidekiq setup'
+  s.description = 'Because Solr sometimes fails, it happens. '\
+                  'It might be a maintenance work you have to do or just Out-Of-Memory problems. '\
+                  'If you are running search-sensitive Rails app, you have to deal with it.'\
+                  'This gem was developed to postpone your index tasks automatically into a sidekiq queue '\
+                  'if Solr engine becomes unavailable'
   s.homepage    = 'https://github.com/anjlab/sunspot_offline'
   s.license     = 'MIT'
 
