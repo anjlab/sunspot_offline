@@ -1,6 +1,9 @@
 # Sunspot Offline
 Simple fail over method into your [sunspot_rails](https://github.com/sunspot/sunspot) + [sidekiq](https://github.com/mperham/sidekiq) setup
 
+[![Build Status](https://travis-ci.org/anjlab/sunspot_offline.svg?branch=master)](https://travis-ci.org/anjlab/sunspot_offline)
+[![Gem Version](https://badge.fury.io/rb/sunspot_offline.svg)](https://badge.fury.io/rb/sunspot_offline)
+
 ## Why?
 
 Because Solr sometimes fails, it happens. It might be a maintenance work you have to do or just Out-Of-Memory problems.
