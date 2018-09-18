@@ -20,15 +20,13 @@ module SunspotOffline
 
       def wrap_request(deletion:, documents:)
         yield
-      rescue Exception => ex
-        if raise_exception?
-          raise ex
-        else
-          job = deletion ? SunspotOffline.configuration.removal_job : SunspotOffline.configuration.index_job
-          perform_at = Time.zone.now + SunspotOffline.configuration.retry_delay
-          documents.call.each { |klass, list| job.perform_at(perform_at, klass, list) }
-          SunspotOffline.on_solr_error(ex)
-        end
+      rescue StandardError => ex
+        raise ex if raise_exception?
+
+        job = deletion ? SunspotOffline.configuration.removal_job : SunspotOffline.configuration.index_job
+        perform_at = Time.zone.now + SunspotOffline.configuration.retry_delay
+        documents.call.each { |klass, list| job.perform_at(perform_at, klass, list) }
+        SunspotOffline.on_solr_error(ex)
       end
 
       def raise_exception?
