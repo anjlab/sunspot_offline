@@ -27,15 +27,13 @@ module SunspotOffline
           job = deletion ? SunspotOffline.configuration.removal_job : SunspotOffline.configuration.index_job
           perform_at = Time.zone.now + SunspotOffline.configuration.retry_delay
           documents.call.each { |klass, list| job.perform_at(perform_at, klass, list) }
-          SunspotOffline.configuration.on_handled_exception.call(ex)
+          SunspotOffline.on_solr_error(ex)
         end
       end
 
       def raise_exception?
         sidekiq_job = SunspotOffline::Sidekiq::CurrentJobMiddleware.get
-        !sidekiq_job.nil? && (
-          fail_over_job?(sidekiq_job) || !SunspotOffline.configuration.handle_sidekiq_job.call(sidekiq_job)
-        )
+        !sidekiq_job.nil? && (fail_over_job?(sidekiq_job) || SunspotOffline.filter_sidekiq_job?(sidekiq_job))
       end
 
       def fail_over_job?(job_name)

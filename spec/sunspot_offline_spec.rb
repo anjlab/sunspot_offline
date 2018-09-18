@@ -17,7 +17,7 @@ RSpec.describe SunspotOffline do
 
     after(:all) { SOLR_INSTANCE.stop }
 
-    it 'does not blocks indexing when solr is available', solr: true do
+    it 'does not blocks indexing when solr is available' do
       SOLR_INSTANCE.with_collection(name: 'sunspot_offline') do
         expect { user.index }.not_to change(SunspotOffline::Sidekiq::IndexWorker.jobs, :size)
       end
@@ -28,6 +28,16 @@ RSpec.describe SunspotOffline do
     before(:each) do
       allow_any_instance_of(RSolr::Client).to receive(:send_and_receive).and_raise(RuntimeError)
       travel_to Time.zone.local(2018, 1, 1, 12, 0, 0)
+    end
+
+    it 'calls a callback on Solr error' do
+      proc = ->(job_name) { expect(job_name).not_to be_nil }
+
+      SunspotOffline.configure { |config| config.solr_error_callback = proc }
+
+      expect(proc).to receive(:call).once.and_call_original
+
+      Sunspot.index(user)
     end
 
     context 'for adding documents' do
@@ -83,7 +93,7 @@ RSpec.describe SunspotOffline do
 
       it 'should not handle errors in filtered jobs' do
         SunspotOffline.configure do |config|
-          config.handle_sidekiq_job = ->(job_class) { DummyWorker.name != job_class }
+          config.filter_sidekiq_job_callback = ->(job_name) { job_name == DummyWorker.name }
         end
 
         SunspotOffline::Sidekiq::CurrentJobMiddleware.new.call(worker, {}, 'default') do
@@ -94,7 +104,7 @@ RSpec.describe SunspotOffline do
 
       it 'should handle errors in non filtered jobs' do
         SunspotOffline.configure do |config|
-          config.handle_sidekiq_job = ->(job_class) { job_class != 'SomeJob' }
+          config.filter_sidekiq_job_callback = ->(job_name) { job_name != DummyWorker.name }
         end
 
         SunspotOffline::Sidekiq::CurrentJobMiddleware.new.call(worker, {}, 'default') do

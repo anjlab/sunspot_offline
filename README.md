@@ -45,8 +45,8 @@ end
 | removal_job | Class| [bundled worker class](lib/sunspot_offline/sidekiq/removal_worker.rb) | Sidekiq worker which will retry **removing existing documents** from Solr. Accepts same set of arguments as `index_job`.
 | retry_delay | Duration | 1 hour | Delay in which sidekiq will attempt to run `index_job` or `removal_job` |
 | default_queue | String | 'default' | Sidekiq's named queue to use |
-| on_handled_exception | Proc | `nil` | A proc which will be executed if Solr is detected to be offline |
-| handle_sidekiq_job | Proc | `nil` | Since some Solr indexing might be happening inside yours sidekiq jobs they dont need to have a custom fail over, sidekiq is able to retry failures by itself. Using this proc you can configure which jobs could be filtered out:<br>`->(job_name) { !job_name.start_with?('Solr') }` |
+| solr_error_callback | Proc(exception) | `nil` | A proc which will be executed if Solr is detected to be offline |
+| filter_sidekiq_job_callback | Proc(job_class) | `nil` | Since some Solr indexing might be happening inside yours sidekiq jobs they dont need to have a custom fail over, sidekiq is able to retry failures by itself. Using this proc you can configure which jobs could be filtered out:<br>`->(job_name) { job_name == 'MySolrIndexJob' }`. In this sample `MySolrIndexJob` wont be applied for a fail over  |
 
 ## Contributing
 

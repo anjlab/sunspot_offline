@@ -16,7 +16,7 @@ module SunspotOffline
           },
           'grouped' => {}
         }
-        SunspotOffline.configuration.on_handled_exception.call(ex)
+        SunspotOffline.on_solr_error(ex)
         self
       end
     end
