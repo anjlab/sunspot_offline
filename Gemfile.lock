@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     sunspot_offline (0.1.0)
-      rails (~> 5.0)
+      rails (>= 5)
       request_store (~> 1.4)
-      sidekiq (~> 5)
+      sidekiq (>= 4)
       sunspot_rails (~> 2.3)
 
 GEM
