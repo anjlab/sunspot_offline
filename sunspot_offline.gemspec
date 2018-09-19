@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler', '~> 1.16'
   s.add_development_dependency 'rake', '~> 10.0'
   s.add_development_dependency 'rspec', '~> 3.6'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'solr_wrapper'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rubocop', '0.59.1'
+  s.add_development_dependency 'solr_wrapper', '2.0'
+  s.add_development_dependency 'sqlite3', '~> 1.3'
 
-  s.add_runtime_dependency 'rails', '>= 5.0'
-  s.add_runtime_dependency 'request_store'
-  s.add_runtime_dependency 'sidekiq'
+  s.add_runtime_dependency 'rails', '>= 5'
+  s.add_runtime_dependency 'request_store', '~> 1.4'
+  s.add_runtime_dependency 'sidekiq', '>= 4'
   s.add_runtime_dependency 'sunspot_rails', '~> 2.3'
 end
