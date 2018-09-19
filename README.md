@@ -30,7 +30,7 @@ $ gem install sunspot_offline
 ## Configuration
 
 By default gem is configured to use built-in workers which will auto-retry indexing in 1 hour is Solr goes offline.
-This all if configurable, preferable via initializer:
+This all is configurable, preferable via initializer:
 
 ```ruby
 # config/initializers/sunspot_offline.rb
