@@ -10,19 +10,19 @@ RSpec.describe SunspotOffline do
 
   let(:user_id) { user.id.to_s }
 
-  # context 'with Solr online' do
-  #   SOLR_INSTANCE = SolrWrapper.default_instance
-  #
-  #   before(:all) { SOLR_INSTANCE.start }
-  #
-  #   after(:all) { SOLR_INSTANCE.stop }
-  #
-  #   it 'does not blocks indexing when solr is available' do
-  #     SOLR_INSTANCE.with_collection(name: 'sunspot_offline') do
-  #       expect { user.index }.not_to change(SunspotOffline::Sidekiq::IndexWorker.jobs, :size)
-  #     end
-  #   end
-  # end
+  context 'with Solr online' do
+    SOLR_INSTANCE = SolrWrapper.default_instance
+
+    before(:all) { SOLR_INSTANCE.start }
+
+    after(:all) { SOLR_INSTANCE.stop }
+
+    it 'does not blocks indexing when solr is available' do
+      SOLR_INSTANCE.with_collection(name: 'sunspot_offline') do
+        expect { user.index }.not_to change(SunspotOffline::Sidekiq::IndexWorker.jobs, :size)
+      end
+    end
+  end
 
   context 'failover' do
     before(:each) do
