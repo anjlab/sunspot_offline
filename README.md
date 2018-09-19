@@ -10,6 +10,10 @@ Because Solr sometimes fails, it happens. It might be a maintenance work you hav
 If you are running search-sensitive Rails app, you have to deal with it.
 This gem was developed to postpone your index tasks automatically into a sidekiq queue if Solr engine becomes unavailable
 
+## Rails Support
+
+Rails 5.0 and higher
+
 ## Installation
 Add this line to your application's Gemfile:
 
