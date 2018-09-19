@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 2.5
   Exclude:
     - spec/dummy/**/*
+    - gemfiles/*
 
 Bundler/OrderedGems:
   Enabled: false
@@ -34,6 +35,9 @@ Metrics/ClassLength:
   Enabled: false
 
 Metrics/BlockLength:
+  Enabled: false
+
+Style/SafeNavigation:
   Enabled: false
 
 Style/MutableConstant:

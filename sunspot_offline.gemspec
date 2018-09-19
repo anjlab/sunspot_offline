@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'solr_wrapper'
   s.add_development_dependency 'sqlite3'
 
+  s.add_runtime_dependency 'rails', '>= 5.0'
   s.add_runtime_dependency 'request_store'
   s.add_runtime_dependency 'sidekiq'
   s.add_runtime_dependency 'sunspot_rails', '~> 2.3'
-  s.add_runtime_dependency 'rails', '>= 5.0'
 end
