@@ -8,8 +8,14 @@ require 'sidekiq/testing'
 Sidekiq::Testing.__test_mode = :fake
 
 require_relative '../spec/dummy/config/environment'
-migration_context = ActiveRecord::MigrationContext.new(File.expand_path('../spec/dummy/db/migrate', __dir__))
-migration_context.migrate if migration_context.needs_migration?
+
+migrations_path = File.expand_path('../spec/dummy/db/migrate', __dir__)
+if defined?(ActiveRecord::MigrationContext) # Rails 5.2
+  migration_context = ActiveRecord::MigrationContext.new(migrations_path)
+  migration_context.migrate if migration_context.needs_migration?
+else
+  ActiveRecord::Migrator.migrate(migrations_path) # Rails 5.0 - 5.1
+end
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'sunspot_offline'

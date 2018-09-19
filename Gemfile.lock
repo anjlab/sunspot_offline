@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     sunspot_offline (0.1.0)
+      rails (>= 5.0)
       request_store
       sidekiq
       sunspot_rails (~> 2.3)
@@ -70,7 +71,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    marcel (0.3.2)
+    marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mimemagic (0.3.2)
@@ -87,7 +88,7 @@ GEM
     powerpack (0.1.2)
     pr_geohash (1.0.0)
     rack (2.0.5)
-    rack-protection (2.0.3)
+    rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -147,7 +148,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
-    sidekiq (5.2.1)
+    sidekiq (5.2.2)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
