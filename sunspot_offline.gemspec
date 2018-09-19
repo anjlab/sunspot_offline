@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
+  s.add_development_dependency 'appraisal', '~> 2.1'
   s.add_development_dependency 'bundler', '~> 1.16'
   s.add_development_dependency 'rake', '~> 10.0'
   s.add_development_dependency 'rspec', '~> 3.6'
