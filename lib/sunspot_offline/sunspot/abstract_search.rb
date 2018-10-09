@@ -3,7 +3,7 @@ module SunspotOffline
     module AbstractSearch
       def execute
         super
-      rescue RSolr::Error::ConnectionRefused, RSolr::Error::Http => ex
+      rescue ::RSolr::Error::ConnectionRefused, ::RSolr::Error::Http => ex
         @solr_result = {
           'response' => {
             'numFound' => -1,
