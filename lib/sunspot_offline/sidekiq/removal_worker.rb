@@ -7,9 +7,9 @@ module SunspotOffline
 
       def perform(model_class, ids)
         if ids.present?
-          Sunspot.remove_by_id(model_class, Array(ids))
+          ::Sunspot.remove_by_id(model_class, Array(ids))
         else
-          Sunspot.remove_all(model_class)
+          ::Sunspot.remove_all(model_class)
         end
       end
     end
