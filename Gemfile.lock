@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sunspot_offline (0.1.1)
+    sunspot_offline (0.1.2)
       rails (>= 5)
       request_store (~> 1.4)
       sidekiq (>= 4)
