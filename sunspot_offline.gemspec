@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.6'
   s.add_development_dependency 'rubocop', '0.59.1'
   s.add_development_dependency 'solr_wrapper', '2.0'
-  s.add_development_dependency 'sqlite3', '~> 1.3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.6'
 
   s.add_runtime_dependency 'rails', '>= 5'
   s.add_runtime_dependency 'request_store', '~> 1.4'
