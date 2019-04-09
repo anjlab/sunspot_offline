@@ -21,7 +21,7 @@ module SunspotOffline
       def wrap_request(deletion:, documents:)
         yield
       rescue StandardError => ex
-        raise ex if raise_exception?
+        raise ex if SunspotOffline.disabled? || raise_exception?
 
         job = deletion ? SunspotOffline.configuration.removal_job : SunspotOffline.configuration.index_job
         perform_at = Time.zone.now + SunspotOffline.configuration.retry_delay

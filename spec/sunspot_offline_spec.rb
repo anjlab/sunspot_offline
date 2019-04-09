@@ -11,7 +11,7 @@ RSpec.describe SunspotOffline do
   let(:user_id) { user.id.to_s }
 
   context 'with Solr online' do
-    SOLR_INSTANCE = SolrWrapper.default_instance(version: '6.6.6')
+    SOLR_INSTANCE = SolrWrapper.instance(version: '6.6.6', port: 8983, verbose: true)
 
     before(:all) { SOLR_INSTANCE.start }
 
@@ -28,6 +28,7 @@ RSpec.describe SunspotOffline do
     before(:each) do
       allow_any_instance_of(RSolr::Client).to receive(:send_and_receive).and_raise(RuntimeError)
       travel_to Time.zone.local(2018, 1, 1, 12, 0, 0)
+      SunspotOffline.configure { |config| config.enabled = true }
     end
 
     it 'calls a callback on Solr error' do
@@ -38,6 +39,12 @@ RSpec.describe SunspotOffline do
       expect(proc).to receive(:call).once.and_call_original
 
       Sunspot.index(user)
+    end
+
+    it 'raises if explicitly disabled' do
+      SunspotOffline.configure { |config| config.enabled = false }
+
+      expect { Sunspot.index(user) }.to raise_error(RuntimeError)
     end
 
     context 'for adding documents' do

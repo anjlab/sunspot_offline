@@ -8,6 +8,7 @@ module SunspotOffline
   class << self
     def configuration
       @configuration ||= OpenStruct.new(
+        enabled: true,
         retry_delay: 1.hour,
         solr_error_callback: ->(_exception) {},
         filter_sidekiq_job_callback: ->(_job) { false }, # some Sidekiq jobs are allowed to fail and retry on their own
@@ -32,6 +33,10 @@ module SunspotOffline
 
     def filter_sidekiq_job?(job_class_name)
       configuration.filter_sidekiq_job_callback.call(job_class_name) if configuration.filter_sidekiq_job_callback
+    end
+
+    def disabled?
+      !configuration.enabled
     end
   end
 end
