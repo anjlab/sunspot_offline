@@ -11,7 +11,7 @@ RSpec.describe SunspotOffline do
   let(:user_id) { user.id.to_s }
 
   context 'with Solr online' do
-    SOLR_INSTANCE = SolrWrapper.default_instance
+    SOLR_INSTANCE = SolrWrapper.default_instance(version: '6.6.6')
 
     before(:all) { SOLR_INSTANCE.start }
 
