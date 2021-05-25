@@ -29,6 +29,10 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
         with:
@@ -38,9 +42,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-bundle-${{ matrix.ruby-version }}-v2-${{ hashFiles('sunspot_offline.gemspec', 'Appraisals') }}
+          key: ${{ runner.os }}-bundle-${{ matrix.ruby-version }}-v1-${{ hashFiles('sunspot_offline.gemspec', 'Appraisals') }}
           restore-keys: |
-            ${{ runner.os }}-bundle-${{ matrix.ruby-version }}-v2-
+            ${{ runner.os }}-bundle-${{ matrix.ruby-version }}-v1-
 
       - name: Install dependencies
         run: |

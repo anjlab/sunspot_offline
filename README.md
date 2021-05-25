@@ -1,7 +1,8 @@
 # Sunspot Offline
 Simple fail over method into your [sunspot_rails](https://github.com/sunspot/sunspot) + [sidekiq](https://github.com/mperham/sidekiq) setup
 
-[![Build Status](https://travis-ci.org/anjlab/sunspot_offline.svg?branch=master)](https://travis-ci.org/anjlab/sunspot_offline)
+![Build](https://github.com/anjlab/sunspot_offline/workflows/Test/badge.svg?branch=master)
+![Rubocop](https://github.com/anjlab/sunspot_offline/workflows/Rubocop/badge.svg?branch=master)
 [![Gem Version](https://badge.fury.io/rb/sunspot_offline.svg)](https://badge.fury.io/rb/sunspot_offline)
 
 ## Why?
