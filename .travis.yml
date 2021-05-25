@@ -1,5 +1,0 @@
-sudo: false
-language: ruby
-rvm:
-  - 2.6.1
-script: bundle exec appraisal install && bundle exec appraisal rake
